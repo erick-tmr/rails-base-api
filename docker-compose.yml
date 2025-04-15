@@ -20,7 +20,7 @@ services:
     # command: bin/rails server -b 0.0.0.0
     volumes:
       # Mount source code for live reload
-      - .:/rails:cached
+      - .:/rails
       # Persist installed gems
       - bundle_cache:/usr/local/bundle
       # Persist node modules if any

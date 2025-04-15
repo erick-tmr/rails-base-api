@@ -38,7 +38,7 @@ RUN gem install bundler -v $BUNDLER_VERSION
 
 # Set common Bundler configuration
 ENV BUNDLE_PATH="/usr/local/bundle"
-WORKDIR /rails # Ensure workdir is set
+WORKDIR /rails
 
 # ------------------------------------------------------------------------------
 # Development Stage
