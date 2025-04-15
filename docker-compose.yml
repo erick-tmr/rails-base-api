@@ -22,7 +22,7 @@ services:
       # Mount source code for live reload
       - .:/rails
       # Persist installed gems
-      - bundle_cache:/usr/local/bundle
+      # - bundle_cache:/usr/local/bundle
       # Persist node modules if any
       # - node_modules:/rails/node_modules
     ports:

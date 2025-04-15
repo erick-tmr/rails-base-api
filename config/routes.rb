@@ -10,4 +10,6 @@ Rails.application.routes.draw do
 
   # Map the root URL ("/") to the custom StatusController
   root to: "status#index"
+
+  resources :post_tests, only: [ :index, :create ]
 end
