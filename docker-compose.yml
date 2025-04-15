@@ -37,6 +37,8 @@ services:
       # WEBPACKER_DEV_SERVER_HOST: webpack
       # BUNDLE_PATH: /usr/local/bundle # Already set in Dockerfile stage
       # PORT: 3000 # Already set in Dockerfile stage
+      HOME: /rails
+    user: "${UID}:${GID}"
     # Add stdin_open and tty for debugging with binding.pry, etc.
     stdin_open: true
     tty: true
@@ -58,6 +60,8 @@ services:
       DATABASE_URL: postgresql://postgres:password@db:5432/rails_base_api_test
       RAILS_ENV: test
       BOOTSNAP_CACHE_DIR: /usr/local/bundle/bootsnap
+      HOME: /rails
+    user: "${UID}:${GID}"
     # Override the default command from the Dockerfile's test stage
     command: ["bundle", "exec", "rspec"]
     # Keep container alive if needed for debugging, otherwise remove for one-off runs
