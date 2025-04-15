@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   root to: "status#index"
 
   resources :post_tests, only: [ :index, :create ]
+  post "/post_test/real" => "post_tests#real_post"
 end
