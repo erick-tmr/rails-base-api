@@ -52,7 +52,7 @@ services:
       # Mount source code
       - .:/rails
       # Use the same gem cache
-      - bundle_cache:/usr/local/bundle
+      # - bundle_cache:/usr/local/bundle
     depends_on:
       - db
     environment:
@@ -65,7 +65,7 @@ services:
     # Override the default command from the Dockerfile's test stage
     command: ["bundle", "exec", "rspec"]
     # Keep container alive if needed for debugging, otherwise remove for one-off runs
-    # stdin_open: true
+    stdin_open: true
     tty: true
 
 volumes:

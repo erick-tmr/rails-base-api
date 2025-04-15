@@ -13,4 +13,6 @@ Rails.application.routes.draw do
 
   resources :post_tests, only: [ :index, :create ]
   post "/post_test/real" => "post_tests#real_post"
+
+  get "/weather" => "weathers#city"
 end
