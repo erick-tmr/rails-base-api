@@ -45,7 +45,7 @@ This is a base Rails API application configured to run with Docker and Docker Co
 
 Execute the test suite using:
 ```bash
-docker compose run --rm web bundle exec rails test
+docker compose run --rm test_runner
 ```
 
 ### Using `pry` for Debugging

@@ -41,6 +41,29 @@ services:
     stdin_open: true
     tty: true
 
+  test_runner:
+    profiles: ["test"] # Only run this service when the 'test' profile is active
+    build:
+      context: .
+      target: test # Use the test stage from Dockerfile
+    volumes:
+      # Mount source code
+      - .:/rails
+      # Use the same gem cache
+      - bundle_cache:/usr/local/bundle
+    depends_on:
+      - db
+    environment:
+      # Use the test database
+      DATABASE_URL: postgresql://postgres:password@db:5432/rails_base_api_test
+      RAILS_ENV: test
+      BOOTSNAP_CACHE_DIR: /usr/local/bundle/bootsnap
+    # Override the default command from the Dockerfile's test stage
+    command: ["bundle", "exec", "rspec"]
+    # Keep container alive if needed for debugging, otherwise remove for one-off runs
+    # stdin_open: true
+    tty: true
+
 volumes:
   postgres_data:
   bundle_cache:
