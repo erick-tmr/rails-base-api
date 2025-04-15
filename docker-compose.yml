@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password # Change this in production!
+      POSTGRES_DB: rails_base_api_development
+    ports:
+      # Use "host.docker.internal:5432:5432" or "172.17.0.1:5432:5432" to access from host if needed
+      # Or remove the ports mapping if you don't need direct access from the host
+      - "5432:5432"
+
+  web:
+    build:
+      context: .
+      target: development # Use the development stage from Dockerfile
+    # Optional: Override command if needed, otherwise uses Dockerfile's CMD
+    # command: bin/rails server -b 0.0.0.0
+    volumes:
+      # Mount source code for live reload
+      - .:/rails:cached
+      # Persist installed gems
+      - bundle_cache:/usr/local/bundle
+      # Persist node modules if any
+      # - node_modules:/rails/node_modules
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgresql://postgres:password@db:5432/rails_base_api_development
+      RAILS_ENV: development
+      BOOTSNAP_CACHE_DIR: /usr/local/bundle/bootsnap # Store bootsnap cache with gems
+      # Uncomment if using webpacker/jsbundling-rails and running dev server separately
+      # WEBPACKER_DEV_SERVER_HOST: webpack
+      # BUNDLE_PATH: /usr/local/bundle # Already set in Dockerfile stage
+      # PORT: 3000 # Already set in Dockerfile stage
+    # Add stdin_open and tty for debugging with binding.pry, etc.
+    stdin_open: true
+    tty: true
+
+volumes:
+  postgres_data:
+  bundle_cache:
+  # node_modules: # Define if using separate node_modules volume 
