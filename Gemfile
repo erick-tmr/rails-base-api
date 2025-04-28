@@ -32,7 +32,7 @@ gem "thruster", require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin Ajax possible
 # gem "rack-cors"
 
-gem "faraday", "~> 2.13.0"
+gem "faraday", "~> 2.13.1"
 gem "faraday-retry"
 
 group :development, :test do
